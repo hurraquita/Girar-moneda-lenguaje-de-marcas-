@@ -13,21 +13,31 @@
         align-items: center;
         font-family: monospace;
       }
+
       .card {
         background: grey;
         padding: 1.5rem;
         border-radius: 8px;
         width: 280px;
       }
+
       img {
         width: 50%;
+
       }
+              #caras{
+          display: none;
+        }
+              #cruces{
+          display: none;
+        }
     </style>
   </head>
+
   <body>
     <div class="card">
       <h2>Girador de moneda</h2>
-      <img src="5a4613abd099a2ad03f9c992.png" alt="" />
+      <img id="inter" src="5a4613abd099a2ad03f9c992.png" alt="" />
       <img id="caras" src="osomonedacara.png" alt="" />
       <img id="cruces" src="osomonedacruz.png" alt="" />
       <p></p>
@@ -50,16 +60,44 @@
   </body>
 </html>
 <script>
-  "use strict"
-  
+  "use strict";
+
+  let intervalReference;
+
   function iniciarInterval() {
-    let valorInterval = 2000;
-    //intervalReference = setInterval(ejecutarInterval, valorInterval);
-    const botonIntervalOn = document.getElementById("botonIntervalOn")
-    //const botonIntervalOff = document.getElementById("botonIntervalOff")
-    const salidaInterval = document.getElementById("salidaInterval")
+    const interrogacionImg = document.getElementById("inter");
+    interrogacionImg.style.display = "none";
+    clearInterval(intervalReference);
+    let valorInterval = 200;
+    const botonIntervalOn = document.getElementById("botonIntervalOn");
+    const salidaInterval = document.getElementById("salidaInterval");
+    const caraImg = document.getElementById("caras");
+    const cruzImg = document.getElementById("cruces");
+    const cara = document.getElementById("cara").checked;
+    const cruz = document.getElementById("cruz").checked;
+
     botonIntervalOn.disabled = true;
+    //intervalReference = setInterval(ejecutarInterval, valorInterval);
     //botonIntervalOff.disabled = false;
     salidaInterval.innerHTML = "Girando";
+    //const botonIntervalOff = document.getElementById("botonIntervalOff") 
+    let mostrarCara = true;
+    intervalReference = setInterval(() => {
+      caraImg.style.display = mostrarCara ? "block" : "none";
+      cruzImg.style.display = mostrarCara ? "none" : "block";
+      mostrarCara = !mostrarCara;
+    }, valorInterval);
+
+    setTimeout(() => {
+      clearInterval(intervalReference);
+      const resultado = Math.random() < 0.5 ? "cara" : "cruz";
+      caraImg.style.display = resultado === "cara" ? "block" : "none";
+      cruzImg.style.display = resultado === "cruz" ? "block" : "none";
+      const gano =
+        (resultado === "cara" && cara) || (resultado === "cruz" && cruz);
+      salidaInterval.innerHTML = gano ? "Ganaste!" : "Perdiste!";
+      botonIntervalOn.disabled = false;
+    }, 2000);
   }
 </script>
+
