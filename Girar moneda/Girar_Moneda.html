@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Card Example</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        background: darkslategray;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: monospace;
+      }
+      .card {
+        background: grey;
+        padding: 1.5rem;
+        border-radius: 8px;
+        width: 280px;
+      }
+      img {
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h2>Girador de moneda</h2>
+      <img src="5a4613abd099a2ad03f9c992.png" alt="" />
+      <img id="caras" src="osomonedacara.png" alt="" />
+      <img id="cruces" src="osomonedacruz.png" alt="" />
+      <p></p>
+      <input
+        type="button"
+        id="botonIntervalOn"
+        value="Tirar moneda"
+        onclick="iniciarInterval()"
+      />
+      <p id="salidaInterval"></p>
+      <label>
+        <input type="checkbox" id="cara" />
+        Cara
+      </label>
+      <label>
+        <input type="checkbox" id="cruz" />
+        Cruz
+      </label>
+    </div>
+  </body>
+</html>
+<script>
+  "use strict"
+  
+  function iniciarInterval() {
+    let valorInterval = 2000;
+    //intervalReference = setInterval(ejecutarInterval, valorInterval);
+    const botonIntervalOn = document.getElementById("botonIntervalOn")
+    //const botonIntervalOff = document.getElementById("botonIntervalOff")
+    const salidaInterval = document.getElementById("salidaInterval")
+    botonIntervalOn.disabled = true;
+    //botonIntervalOff.disabled = false;
+    salidaInterval.innerHTML = "Girando";
+  }
+</script>
